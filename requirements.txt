@@ -1,0 +1,2 @@
+# Sarvamangala Matrimony dependencies
+# Built with Python 3 Standard Library (http.server, socketserver, sqlite3, hashlib)

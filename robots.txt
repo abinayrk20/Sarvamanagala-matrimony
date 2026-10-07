@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /sm-admin/
+Disallow: /sm-admin
+Disallow: /api/admin/
+
+Allow: /
+Allow: /index.html
+Allow: /assets/
+Allow: /css/
+Allow: /js/

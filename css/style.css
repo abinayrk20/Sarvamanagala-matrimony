@@ -1,0 +1,707 @@
+/* ==========================================================================
+   Sarvamangala Matrimony – Kanchipuram
+   Premium South Indian Matrimonial Theme & Custom Styles
+   Colors: Sandal/Cream, Deep Maroon, Temple Gold
+   ========================================================================== */
+
+:root {
+  --color-sandal-50: #FFFDF9;
+  --color-sandal-100: #FAF5EB;
+  --color-sandal-200: #F3E8D3;
+  --color-sandal-300: #E6D2B1;
+  --color-maroon-700: #851828;
+  --color-maroon-800: #6B111E;
+  --color-maroon-900: #480A13;
+  --color-maroon-950: #30060C;
+  --color-gold-300: #F4DE97;
+  --color-gold-400: #E5C365;
+  --color-gold-500: #C99B38;
+  --color-gold-600: #A87D22;
+  --font-heading: 'Cinzel', 'Playfair Display', 'Noto Serif Tamil', Georgia, serif;
+  --font-tamil: 'Mukta Malar', 'Noto Sans Tamil', sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-sandal-50);
+  color: #2D1A1E;
+  overflow-x: hidden;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-tamil {
+  font-family: var(--font-tamil);
+}
+
+/* ==========================================================================
+   1. Elegant Full-Screen Site Loading Animation
+   ========================================================================== */
+#site-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle at center, #540D17 0%, #3B070E 60%, #200307 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+#site-loader.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(1.04);
+}
+
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+    filter: drop-shadow(0 0 12px rgba(245, 195, 101, 0.95)) drop-shadow(0 0 24px rgba(212, 175, 55, 0.6));
+  }
+  30% {
+    transform: scale(1.08, 0.94) translateY(-1px) rotate(1deg);
+    filter: drop-shadow(0 0 15px rgba(254, 215, 170, 1)) drop-shadow(0 0 30px rgba(245, 158, 11, 0.7));
+  }
+  60% {
+    transform: scale(0.96, 1.05) translateY(-2px) rotate(-1deg);
+    filter: drop-shadow(0 0 10px rgba(245, 195, 101, 0.9)) drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+  }
+  85% {
+    transform: scale(1.04, 0.98) translateY(0) rotate(0.5deg);
+  }
+}
+
+.animate-flame {
+  animation: flameFlicker 1.8s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 30s linear infinite;
+}
+
+/* ==========================================================================
+   2. Sticky Animated Transparent & Scrolled Header
+   ========================================================================== */
+header {
+  transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+header.header-transparent {
+  background: rgba(30, 4, 8, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(229, 195, 101, 0.25);
+}
+
+header.header-scrolled,
+header.header-compact {
+  padding-top: 0.45rem !important;
+  padding-bottom: 0.45rem !important;
+  background-color: rgba(48, 6, 12, 0.96) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 15px rgba(201, 155, 56, 0.2) !important;
+  border-bottom: 2px solid rgba(201, 155, 56, 0.6) !important;
+}
+
+/* Official Logo Display & Animation */
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.official-logo-img {
+  animation: logoFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  object-fit: contain;
+  display: block;
+}
+
+.official-logo-img:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 4px 14px rgba(201, 155, 56, 0.4));
+}
+
+/* ==========================================================================
+   2.1 Cinematic Ken Burns & Hero Parallax
+   ========================================================================== */
+@keyframes kenBurnsSlow {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.07) translate3d(-1%, -1.2%, 0);
+  }
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+.ken-burns-animation {
+  animation: kenBurnsSlow 26s ease-in-out infinite alternate;
+  transform-origin: center 25%;
+  will-change: transform;
+}
+
+/* Floating Priya Matching Card in Hero */
+@keyframes floatPriyaCard {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.hero-floating-priya-card {
+  animation: floatPriyaCard 4.5s ease-in-out infinite;
+  will-change: transform;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-floating-priya-card:hover {
+  animation-play-state: paused;
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.4), 0 0 25px rgba(201, 155, 56, 0.4);
+}
+
+/* Three Hero Buttons Styling */
+.btn-hero-primary {
+  background: linear-gradient(135deg, #480A13 0%, #6B111E 50%, #851828 100%);
+  color: #F4DE97;
+  border: 2px solid #E5C365;
+  box-shadow: 0 8px 24px rgba(72, 10, 19, 0.5), 0 0 20px rgba(201, 155, 56, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(72, 10, 19, 0.6), 0 0 32px rgba(229, 195, 101, 0.5);
+  border-color: #F4DE97;
+}
+
+.btn-hero-priya,
+.btn-hero-rules {
+  background: linear-gradient(135deg, #C99B38 0%, #A87D22 50%, #6B111E 100%);
+  color: #FFFFFF;
+  border: 2px solid #F4DE97;
+  box-shadow: 0 8px 24px rgba(201, 155, 56, 0.4), 0 0 20px rgba(107, 17, 30, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-hero-priya:hover,
+.btn-hero-rules:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 34px rgba(201, 155, 56, 0.6), 0 0 32px rgba(244, 222, 151, 0.55);
+  border-color: #FFFFFF;
+}
+
+.btn-hero-login {
+  background: rgba(255, 253, 249, 0.95);
+  color: #480A13;
+  border: 2px solid #C99B38;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-hero-login:hover {
+  background: #FFFFFF;
+  color: #6B111E;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35), 0 0 18px rgba(201, 155, 56, 0.35);
+  border-color: #E5C365;
+}
+
+/* ==========================================================================
+   3. Floating Decorative Elements & Parallax Layers
+   ========================================================================== */
+@keyframes floatGentle {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(0.8deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes floatGentleReverse {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(14px) rotate(-1deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes floatPetal {
+  0% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-16px) translateX(12px) rotate(35deg);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes sparkleTwinkle {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 6px rgba(244, 222, 151, 0.9));
+  }
+}
+
+.hero-float-card-1 {
+  animation: floatGentle 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-float-card-2 {
+  animation: floatGentleReverse 6.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-float-badge {
+  animation: floatGentle 4.5s ease-in-out infinite 0.8s;
+  will-change: transform;
+}
+
+.floating-petal-1 {
+  animation: floatPetal 7s ease-in-out infinite;
+}
+
+.floating-petal-2 {
+  animation: floatPetal 8.5s ease-in-out infinite 1.5s;
+}
+
+.floating-sparkle-1 {
+  animation: sparkleTwinkle 3s ease-in-out infinite;
+}
+
+.floating-sparkle-2 {
+  animation: sparkleTwinkle 3.8s ease-in-out infinite 1.2s;
+}
+
+/* ==========================================================================
+   4. Priya Matching ❤️ Feature Section & Interactive Cards
+   ========================================================================== */
+@keyframes heartBeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.18);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+}
+
+.animate-heart-beat {
+  animation: heartBeat 2.2s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.priya-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.priya-card:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 25px 35px -10px rgba(107, 17, 30, 0.22),
+              0 0 25px rgba(201, 155, 56, 0.25);
+  border-color: #D4AF37 !important;
+}
+
+.priya-card .priya-hover-reveal {
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s ease;
+}
+
+.priya-card:hover .priya-hover-reveal {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.priya-card:hover .priya-card-image {
+  transform: scale(1.06);
+}
+
+.priya-card-image {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   5. Animated Buttons & Shimmer Sweeps
+   ========================================================================== */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  transition: transform 0.75s ease-out;
+  pointer-events: none;
+}
+
+.btn-shimmer:hover::after {
+  transform: translateX(350%) rotate(25deg);
+}
+
+.btn-tactile {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-tactile:hover {
+  transform: translateY(-2px);
+}
+
+.btn-tactile:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+/* ==========================================================================
+   6. Scroll Reveal Animations (IntersectionObserver)
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+
+/* ==========================================================================
+   7. Mobile Menu Slide-Over Drawer
+   ========================================================================== */
+#mobile-menu-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0.35s ease;
+}
+
+#mobile-menu-drawer.drawer-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(48, 6, 12, 0.65);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#mobile-menu-drawer.drawer-open .drawer-backdrop {
+  opacity: 1;
+}
+
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 86%;
+  max-width: 360px;
+  background-color: #FAF5EB;
+  border-left: 2px solid #C99B38;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -15px 0 35px rgba(48, 6, 12, 0.35);
+  overflow-y: auto;
+}
+
+#mobile-menu-drawer.drawer-open .drawer-panel {
+  transform: translateX(0);
+}
+
+/* ==========================================================================
+   8. Heritage Visuals, Patterns, Gradients & Borders
+   ========================================================================== */
+/* Gold Text Gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FDE68A 0%, #D4AF37 50%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-maroon-gradient {
+  background: linear-gradient(135deg, #8B1829 0%, #520B15 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Traditional South Indian Kolam Pattern Background */
+.bg-kolam-subtle {
+  background-color: var(--color-sandal-100);
+  background-image: radial-gradient(#C99B38 0.75px, transparent 0.75px), radial-gradient(#C99B38 0.75px, var(--color-sandal-100) 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+.bg-maroon-gradient {
+  background: linear-gradient(145deg, #6B111E 0%, #4D0914 60%, #30060C 100%);
+}
+
+.bg-maroon-card {
+  background: linear-gradient(180deg, #741321 0%, #560C17 100%);
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #F7E4A3 0%, #D4AF37 50%, #B8860B 100%);
+}
+
+/* Kanchipuram Silk Zari Border Styling */
+.zari-border-top {
+  border-top: 4px solid #C99B38;
+  position: relative;
+}
+
+.zari-border-top::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-image: repeating-linear-gradient(45deg, #6B111E, #6B111E 4px, #DFB758 4px, #DFB758 8px);
+}
+
+.temple-border-bottom {
+  position: relative;
+}
+
+.temple-border-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(-45deg, #C99B38, #C99B38 5px, #851828 5px, #851828 10px);
+}
+
+/* Card Glow & Elevations */
+.card-hover-shadow {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover-shadow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(107, 17, 30, 0.1), 0 10px 10px -5px rgba(201, 155, 56, 0.08);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF5EB;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C99B38;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B111E;
+}
+
+/* Circular Score Animation */
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.8s ease-in-out;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* Auspicious Pulsing Dot */
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+  }
+}
+
+.pulse-gold {
+  animation: pulse-gold 2s infinite;
+}
+
+/* Custom Checkbox and Radio styling */
+input[type="radio"]:checked, input[type="checkbox"]:checked {
+  accent-color: #851828;
+}
+
+/* Dialog & Modal Backdrop */
+dialog::backdrop {
+  background: rgba(48, 6, 12, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+dialog[open] {
+  animation: modal-enter 0.25s ease-out forwards;
+}
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Tab active styles */
+.tab-active {
+  background-color: #6B111E !important;
+  color: #FFFDF9 !important;
+  border-color: #DFB758 !important;
+}
+
+/* Print Receipt Styling */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-receipt, #printable-receipt * {
+    visibility: visible;
+  }
+  #printable-receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+/* Mobile Bottom Navigation Safe Spacing */
+@media (max-width: 768px) {
+  .pb-mobile-nav {
+    padding-bottom: 74px;
+  }
+}
+
+/* Respect User Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .reveal-left, .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  #site-loader {
+    display: none !important;
+  }
+}
