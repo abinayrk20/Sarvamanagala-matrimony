@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarvamangala Matrimony – Private Admin</title>
+  
+  <!-- SEARCH ENGINE PRIVACY: Strictly prevent search engines from crawling or indexing -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/circle-logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sandal: {
+              50: '#FFFDF9',
+              100: '#FAF5EB',
+              200: '#F3E8D3',
+              300: '#E6D2B1',
+              400: '#D5B787'
+            },
+            maroon: {
+              700: '#851828',
+              800: '#6B111E',
+              900: '#480A13',
+              950: '#30060C'
+            },
+            gold: {
+              300: '#F4DE97',
+              400: '#E5C365',
+              500: '#C99B38',
+              600: '#A87D22'
+            }
+          },
+          fontFamily: {
+            heading: ['Cinzel', 'serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-heading { font-family: 'Cinzel', serif; }
+    /* Hide scrollbar for tabs */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-[#F8F5EE] text-[#2D1A1E] min-h-screen antialiased flex flex-col selection:bg-maroon-800 selection:text-white">
+
+  <!-- =========================================================================
+       VIEW 1: ADMIN LOGIN SCREEN (SHOWN WHEN NOT LOGGED IN)
+       ========================================================================= -->
+  <div id="view-login" class="flex-1 flex items-center justify-center p-4 relative overflow-hidden bg-gradient-to-br from-maroon-950 via-[#3B0810] to-[#200408]">
+    <!-- Background Watermark / Kolam Accents -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gold-500/10 blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-maroon-700/20 blur-3xl pointer-events-none"></div>
+
+    <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl border-2 border-gold-400 overflow-hidden relative z-10">
+      <!-- Login Header with Official Circular Emblem -->
+      <div class="bg-gradient-to-r from-maroon-950 via-maroon-900 to-maroon-950 p-6 text-center text-white border-b-2 border-gold-400">
+        <div class="w-20 h-20 mx-auto mb-3 rounded-full p-1 bg-gradient-to-tr from-gold-500 via-maroon-800 to-gold-400 shadow-xl border border-gold-300 overflow-hidden bg-white/10">
+          <img src="../assets/circle-logo.png" alt="Sarvamangala Matrimony Logo" class="w-full h-full object-cover rounded-full">
+        </div>
+        <h1 class="font-heading text-xl font-bold text-gold-300 tracking-wide">
+          Sarvamangala Matrimony
+        </h1>
+        <p class="text-xs text-gray-300 font-semibold tracking-wider uppercase mt-0.5">
+          Private Admin Portal • Kanchipuram
+        </p>
+      </div>
+
+      <!-- Login Form Body -->
+      <div class="p-6 sm:p-8 space-y-5 bg-sandal-50">
+        <div class="text-center space-y-1">
+          <h2 class="text-base font-bold text-maroon-950">Administrative Access</h2>
+          <p class="text-xs text-gray-500">Enter authenticated credentials to manage portal operations.</p>
+        </div>
+
+        <!-- Error Alert -->
+        <div id="login-error-alert" class="hidden bg-rose-50 border border-rose-300 text-rose-800 px-4 py-2.5 rounded-xl text-xs flex items-center gap-2">
+          <span>⚠️</span>
+          <span id="login-error-msg">Invalid admin credentials.</span>
+        </div>
+
+        <form id="admin-login-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Admin Email</label>
+            <input type="email" id="login-email" value="admin@sarvamangala.com" required placeholder="admin@sarvamangala.com"
+              class="w-full bg-white border border-sandal-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none focus:border-maroon-800 focus:ring-1 focus:ring-maroon-800">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
+            <div class="relative">
+              <input type="password" id="login-password" value="KanchiMangala@2026" required placeholder="••••••••••••"
+                class="w-full bg-white border border-sandal-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold focus:outline-none focus:border-maroon-800 focus:ring-1 focus:ring-maroon-800 pr-10">
+              <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs">
+                👁️
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] text-gray-500">
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="checkbox" checked class="rounded text-maroon-800 focus:ring-0">
+              <span>Remember session (24h)</span>
+            </label>
+            <span class="text-gold-600 font-semibold">Role: Super Admin</span>
+          </div>
+
+          <button type="submit" id="btn-login-submit"
+            class="w-full bg-maroon-900 hover:bg-maroon-800 active:scale-[0.99] text-white font-bold py-3 px-4 rounded-xl shadow-lg border border-gold-400 flex items-center justify-center gap-2 transition-all text-xs sm:text-sm cursor-pointer">
+            <span>🔒</span>
+            <span>Secure Login</span>
+          </button>
+        </form>
+
+        <div class="pt-3 border-t border-sandal-200 text-center space-y-1">
+          <p class="text-[10px] text-gray-400">
+            Protected by role-based authorization and cryptographic session tokens.
+          </p>
+          <a href="/" class="inline-block text-[11px] text-maroon-800 hover:underline font-semibold">
+            ← Return to Public Website
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       VIEW 2: ACCESS DENIED SCREEN (SHOWN WHEN UNAUTHORIZED)
+       ========================================================================= -->
+  <div id="view-denied" class="hidden flex-1 flex items-center justify-center p-4 bg-sandal-100">
+    <div class="max-w-md w-full bg-white rounded-3xl p-8 border-2 border-rose-300 shadow-xl text-center space-y-4">
+      <div class="w-16 h-16 bg-rose-100 text-rose-700 rounded-full flex items-center justify-center text-3xl mx-auto border-2 border-rose-400">
+        🚫
+      </div>
+      <h2 class="font-heading text-xl font-bold text-rose-900">Access Denied</h2>
+      <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+        You do not have administrative authorization to access this area. Normal matrimonial users cannot access the admin dashboard.
+      </p>
+      <div class="pt-2 flex flex-col gap-2">
+        <a href="/" class="bg-maroon-900 text-gold-300 hover:bg-maroon-800 py-2.5 px-4 rounded-xl text-xs font-bold shadow text-center transition-all">
+          Return to Sarvamangala Matrimony Public Website
+        </a>
+        <button onclick="handleShowAdminLogin()" class="w-full bg-gold-500 hover:bg-gold-600 active:scale-[0.99] text-maroon-950 font-bold py-2.5 px-4 rounded-xl text-xs transition-all shadow cursor-pointer">
+          🔑 Admin Sign In
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       VIEW 3: COMPLETE ADMIN DASHBOARD (SHOWN WHEN AUTHENTICATED)
+       ========================================================================= -->
+  <div id="view-dashboard" class="hidden min-h-screen flex flex-col bg-[#F8F5EE]">
+    <!-- Top Admin App Bar -->
+    <header class="bg-maroon-950 text-white border-b-2 border-gold-400 px-4 sm:px-6 py-3 flex items-center justify-between sticky top-0 z-40 shadow-lg">
+      <div class="flex items-center gap-3">
+        <!-- Logo -->
+        <div class="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-gold-500 to-maroon-800 shadow border border-gold-400 overflow-hidden flex-shrink-0">
+          <img src="../assets/circle-logo.png" alt="Admin Logo" class="w-full h-full object-cover rounded-full">
+        </div>
+        <div>
+          <span class="font-heading text-base sm:text-lg font-bold text-gold-300 block leading-tight">
+            Sarvamangala Matrimony
+          </span>
+          <span class="text-[10px] text-gray-300 uppercase tracking-widest flex items-center gap-1 font-semibold">
+            <span>🛡️</span> Private Admin Control Center • Kanchipuram
+          </span>
+        </div>
+      </div>
+
+      <!-- Right: User Info & Secure Logout Button -->
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex flex-col text-right">
+          <span id="admin-user-name" class="text-xs font-bold text-gold-200">Temple City Administrator</span>
+          <span class="text-[10px] text-emerald-400 font-medium flex items-center justify-end gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Role: Super Admin (Verified)
+          </span>
+        </div>
+
+        <button onclick="handleAdminLogout()" title="Secure Logout"
+          class="bg-maroon-900 hover:bg-rose-900 text-gold-300 hover:text-white border border-gold-500/50 px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow cursor-pointer">
+          <span>🚪</span>
+          <span class="hidden sm:inline">Logout</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace: Sidebar + Dynamic Content -->
+    <div class="flex-1 flex flex-col md:flex-row">
+      <!-- Left Sidebar Navigation -->
+      <aside class="w-full md:w-64 bg-maroon-900 text-gray-200 border-r border-gold-500/30 flex-shrink-0 flex flex-col shadow-lg">
+        <!-- Mobile Section Scroll or Desktop Sidebar Menu -->
+        <nav class="p-3 space-y-1 overflow-x-auto md:overflow-y-auto no-scrollbar flex md:flex-col gap-1 md:gap-0">
+          <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="sidebar-tab active-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all text-white bg-maroon-800 border-l-4 border-gold-400">
+            <span>📊</span> <span>Dashboard</span>
+          </button>
+          <button onclick="switchTab('members')" id="tab-btn-members" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>👥</span> <span>Members</span>
+          </button>
+                    <button onclick="switchTab('gpay-verification')" id="tab-btn-gpay-verification" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span class="flex items-center gap-2.5"><span>📱</span> <span>GPay ₹2k Verification</span></span>
+            <span id="badge-gpay-pending" class="bg-emerald-500 text-white font-extrabold text-[10px] px-2 py-0.5 rounded-full">0</span>
+          </button>
+          <button onclick="switchTab('trust-badge')" id="tab-btn-trust-badge" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span class="flex items-center gap-2.5"><span>🪔</span> <span>Kanchi Silk Trust</span></span>
+            <span id="badge-trust-count" class="bg-gold-400 text-maroon-950 font-extrabold text-[10px] px-2 py-0.5 rounded-full">0</span>
+          </button>
+          <button onclick="switchTab('pending')" id="tab-btn-pending" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span class="flex items-center gap-2.5"><span>⏳</span> <span>Pending Approvals</span></span>
+            <span id="badge-pending" class="bg-amber-400 text-maroon-950 font-extrabold text-[10px] px-2 py-0.5 rounded-full">1</span>
+          </button>
+          <button onclick="switchTab('approved')" id="tab-btn-approved" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>✅</span> <span>Approved Profiles</span>
+          </button>
+          <button onclick="switchTab('rejected')" id="tab-btn-rejected" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>❌</span> <span>Rejected Profiles</span>
+          </button>
+          <button onclick="switchTab('payments')" id="tab-btn-payments" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>💳</span> <span>Payments (₹2k & ₹25k)</span>
+          </button>
+          <button onclick="switchTab('matches')" id="tab-btn-matches" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>💖</span> <span>Matches & Priya AI</span>
+          </button>
+          <button onclick="switchTab('horoscopes')" id="tab-btn-horoscopes" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>🪐</span> <span>Horoscopes & Jathagam</span>
+          </button>
+          <button onclick="switchTab('enquiries')" id="tab-btn-enquiries" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span class="flex items-center gap-2.5"><span>💬</span> <span>Enquiries</span></span>
+            <span id="badge-enquiries" class="bg-gold-400 text-maroon-950 font-extrabold text-[10px] px-2 py-0.5 rounded-full">3</span>
+          </button>
+          <button onclick="switchTab('membership')" id="tab-btn-membership" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>🏷️</span> <span>Membership & Rules</span>
+          </button>
+          <button onclick="switchTab('reports')" id="tab-btn-reports" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>📈</span> <span>Reports</span>
+          </button>
+          <button onclick="switchTab('settings')" id="tab-btn-settings" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>⚙️</span> <span>Settings</span>
+          </button>
+          <button onclick="switchTab('logs')" id="tab-btn-logs" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span>📜</span> <span>Admin Activity Log</span>
+          </button>
+        </nav>
+
+        <div class="hidden md:block mt-auto p-4 border-t border-gold-500/20 text-[11px] text-gray-400 space-y-1">
+          <p class="text-gold-300 font-bold">Sarvamangala Matrimony</p>
+          <p>Kanchipuram Operations HQ</p>
+          <p class="text-[10px] text-gray-500">Ph: 8248853928 • 9942006877</p>
+        </div>
+      </aside>
+
+      <!-- Right Content Area -->
+      <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+
+        <!-- ===================================================================
+             TAB 1: DASHBOARD OVERVIEW
+             =================================================================== -->
+        <section id="section-dashboard" class="tab-content space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-sandal-300 pb-4">
+            <div>
+              <h2 class="font-heading text-2xl font-bold text-maroon-950">Operations Dashboard</h2>
+              <p class="text-xs text-gray-500">Live matrimonial metrics, registrations, and revenue tracking</p>
+            </div>
+            <button onclick="refreshAllData()" class="bg-white border border-sandal-300 hover:bg-sandal-100 px-3 py-1.5 rounded-xl text-xs font-bold text-maroon-900 shadow-xs flex items-center gap-1 self-start sm:self-auto cursor-pointer">
+              <span>🔄</span> Refresh Data
+            </button>
+          </div>
+
+          <!-- 7 KPI Stats Cards -->
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+            <div class="bg-white p-4 rounded-2xl border border-sandal-300 shadow-sm">
+              <span class="text-[11px] text-gray-500 block font-semibold">Total Members</span>
+              <strong id="stat-total-members" class="font-heading text-2xl text-maroon-950 font-extrabold">9</strong>
+            </div>
+            <div class="bg-white p-4 rounded-2xl border border-sandal-300 shadow-sm">
+              <span class="text-[11px] text-gray-500 block font-semibold">New Registrations</span>
+              <strong id="stat-new-reg" class="font-heading text-2xl text-blue-900 font-extrabold">1</strong>
+            </div>
+            <div class="bg-amber-50 p-4 rounded-2xl border border-amber-300 shadow-sm">
+              <span class="text-[11px] text-amber-800 block font-semibold">Pending Approvals</span>
+              <strong id="stat-pending" class="font-heading text-2xl text-amber-900 font-extrabold">1</strong>
+            </div>
+            <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-300 shadow-sm">
+              <span class="text-[11px] text-emerald-800 block font-semibold">Approved Profiles</span>
+              <strong id="stat-approved" class="font-heading text-2xl text-emerald-900 font-extrabold">8</strong>
+            </div>
+            <div class="bg-white p-4 rounded-2xl border border-sandal-300 shadow-sm">
+              <span class="text-[11px] text-gray-500 block font-semibold">Registration Fees (₹2k)</span>
+              <strong id="stat-reg-rev" class="font-heading text-xl text-maroon-900 font-extrabold">₹18,000</strong>
+            </div>
+            <div class="bg-white p-4 rounded-2xl border border-sandal-300 shadow-sm">
+              <span class="text-[11px] text-gray-500 block font-semibold">Match Fees (₹25k)</span>
+              <strong id="stat-final-rev" class="font-heading text-xl text-emerald-900 font-extrabold">₹50,000</strong>
+            </div>
+            <div class="bg-white p-4 rounded-2xl border border-sandal-300 shadow-sm">
+              <span class="text-[11px] text-gray-500 block font-semibold">New Enquiries</span>
+              <strong id="stat-enquiries" class="font-heading text-2xl text-gold-600 font-extrabold">3</strong>
+            </div>
+          </div>
+
+          <!-- Pending Review Alert Box -->
+          <div id="pending-alert-banner" class="bg-gradient-to-r from-amber-100 to-amber-50 border-l-4 border-amber-500 p-4 rounded-r-2xl shadow-sm flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">⏳</span>
+              <div>
+                <h4 class="font-bold text-xs sm:text-sm text-amber-950">Profiles Awaiting Jathagam & ID Verification</h4>
+                <p class="text-xs text-amber-800">1 profile currently requires document approval before becoming visible to families.</p>
+              </div>
+            </div>
+                      <button onclick="switchTab('gpay-verification')" id="tab-btn-gpay-verification" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span class="flex items-center gap-2.5"><span>📱</span> <span>GPay ₹2k Verification</span></span>
+            <span id="badge-gpay-pending" class="bg-emerald-500 text-white font-extrabold text-[10px] px-2 py-0.5 rounded-full">0</span>
+          </button>
+          <button onclick="switchTab('trust-badge')" id="tab-btn-trust-badge" class="sidebar-tab w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between transition-all hover:bg-maroon-800 text-gray-300 hover:text-white">
+            <span class="flex items-center gap-2.5"><span>🪔</span> <span>Kanchi Silk Trust</span></span>
+            <span id="badge-trust-count" class="bg-gold-400 text-maroon-950 font-extrabold text-[10px] px-2 py-0.5 rounded-full">0</span>
+          </button>
+          <button onclick="switchTab('pending')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow cursor-pointer">
+              Review Queue
+            </button>
+          </div>
+
+          <!-- Recent Members Table Preview -->
+          <div class="bg-white rounded-3xl border border-sandal-300 shadow-sm p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-heading font-bold text-base text-maroon-950">Recent Member Profiles</h3>
+              <button onclick="switchTab('members')" class="text-xs font-bold text-maroon-800 hover:underline">View All Members →</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead class="bg-sandal-100 text-gray-700 font-bold border-b border-sandal-300">
+                  <tr>
+                    <th class="p-3">Profile ID</th>
+                    <th class="p-3">Name</th>
+                    <th class="p-3">Community / Caste</th>
+                    <th class="p-3">District</th>
+                    <th class="p-3">Jathagam / Star</th>
+                    <th class="p-3">Fee Status</th>
+                    <th class="p-3">Status</th>
+                    <th class="p-3">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-recent-members" class="divide-y divide-gray-100">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 2: MEMBERS MANAGEMENT
+             =================================================================== -->
+        <section id="section-members" class="tab-content hidden space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sandal-300 pb-4">
+            <div>
+              <h2 class="font-heading text-2xl font-bold text-maroon-950">Member Management</h2>
+              <p class="text-xs text-gray-500">Manage candidate listings, verify documents, edit profiles, and regulate account statuses</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" id="members-search-input" onkeyup="filterMembersTable()" placeholder="Search name, ID, caste, town..."
+                class="bg-white border border-sandal-300 rounded-xl px-3 py-1.5 text-xs font-semibold focus:outline-none focus:border-maroon-800">
+            </div>
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+            <button onclick="setMemberStatusFilter('all', this)" class="member-filter-pill px-3 py-1 rounded-full font-bold bg-maroon-900 text-white">All (<span id="count-all">0</span>)</button>
+            <button onclick="setMemberStatusFilter('pending', this)" class="member-filter-pill px-3 py-1 rounded-full font-bold bg-white text-gray-700 border hover:bg-sandal-100">Pending (<span id="count-pending">0</span>)</button>
+            <button onclick="setMemberStatusFilter('approved', this)" class="member-filter-pill px-3 py-1 rounded-full font-bold bg-white text-gray-700 border hover:bg-sandal-100">Approved (<span id="count-approved">0</span>)</button>
+            <button onclick="setMemberStatusFilter('rejected', this)" class="member-filter-pill px-3 py-1 rounded-full font-bold bg-white text-gray-700 border hover:bg-sandal-100">Rejected (<span id="count-rejected">0</span>)</button>
+            <button onclick="setMemberStatusFilter('suspended', this)" class="member-filter-pill px-3 py-1 rounded-full font-bold bg-white text-gray-700 border hover:bg-sandal-100">Suspended (<span id="count-suspended">0</span>)</button>
+            <button onclick="setMemberStatusFilter('blocked', this)" class="member-filter-pill px-3 py-1 rounded-full font-bold bg-white text-gray-700 border hover:bg-sandal-100">Blocked (<span id="count-blocked">0</span>)</button>
+          </div>
+
+          <!-- Members Full Table -->
+          <div class="bg-white rounded-3xl border border-sandal-300 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead class="bg-sandal-100 text-gray-700 font-bold border-b border-sandal-300">
+                  <tr>
+                    <th class="p-3.5">Candidate</th>
+                    <th class="p-3.5">Age / Gender</th>
+                    <th class="p-3.5">Caste / Subcaste</th>
+                    <th class="p-3.5">District / City</th>
+                    <th class="p-3.5">Profession / Income</th>
+                    <th class="p-3.5">Horoscope Verified</th>
+                    <th class="p-3.5">Fee</th>
+                    <th class="p-3.5">Status</th>
+                    <th class="p-3.5 text-center">Manage Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="members-table-body" class="divide-y divide-gray-100">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 3: PENDING APPROVALS QUEUE
+             =================================================================== -->
+        <!-- ===================================================================
+             TAB: KANCHI SILK TRUST BADGE VERIFICATION QUEUE
+             =================================================================== -->
+        <section id="section-trust-badge" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h2 class="font-heading text-2xl font-bold text-maroon-950 flex items-center gap-2">
+                <span>🪔</span> <span>Kanchi Silk Trust Badges Queue</span>
+              </h2>
+              <p class="text-xs text-gray-500">Authenticate identity documents and grant the prestigious gold & maroon Kanchi Silk Trust seal to genuine members.</p>
+            </div>
+            <button onclick="loadTrustBadgesQueue()" class="px-3.5 py-1.5 bg-sandal-200 hover:bg-sandal-300 text-maroon-950 font-bold rounded-xl text-xs transition-colors self-start sm:self-auto">
+              ↻ Refresh Queue
+            </button>
+          </div>
+
+          <!-- Confidentiality Banner -->
+          <div class="bg-amber-50 border border-amber-300 rounded-2xl p-4 text-xs text-amber-950 flex items-start gap-3">
+            <span class="text-xl">🔒</span>
+            <div>
+              <strong class="font-bold block">Strict Government ID Protection Mandate</strong>
+              <p class="text-[11px] text-amber-800 mt-0.5">Documents submitted for trust badge review are viewable only by authenticated administrators. These identity documents are strictly confidential and are NEVER exposed on the public website or shared with other members.</p>
+            </div>
+          </div>
+
+          <!-- Trust Badges Table -->
+          <div class="bg-white rounded-3xl border border-sandal-300 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr class="bg-sandal-100 text-maroon-950 font-bold border-b border-sandal-300 uppercase tracking-wider text-[11px]">
+                    <th class="p-3.5">Profile ID</th>
+                    <th class="p-3.5">Member Name</th>
+                    <th class="p-3.5">Location</th>
+                    <th class="p-3.5">Submitted Document</th>
+                    <th class="p-3.5">Trust Status</th>
+                    <th class="p-3.5">Verified Details</th>
+                    <th class="p-3.5 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="trust-badges-table-body" class="divide-y divide-gray-100">
+                  <tr><td colspan="7" class="p-8 text-center text-gray-500">Loading trust badge queue...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-pending" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4">
+            <h2 class="font-heading text-2xl font-bold text-amber-950">Pending Approvals Queue</h2>
+            <p class="text-xs text-gray-500">Every profile must have compulsory photo and Jathagam document verified by staff before activation.</p>
+          </div>
+
+          <div id="pending-cards-container" class="space-y-4">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 4: APPROVED PROFILES
+             =================================================================== -->
+        <section id="section-approved" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4">
+            <h2 class="font-heading text-2xl font-bold text-emerald-950">Approved Live Profiles</h2>
+            <p class="text-xs text-gray-500">Active profiles currently published on the Sarvamangala Matrimony portal.</p>
+          </div>
+          <div id="approved-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 5: REJECTED PROFILES
+             =================================================================== -->
+        <section id="section-rejected" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4">
+            <h2 class="font-heading text-2xl font-bold text-rose-950">Rejected Profiles</h2>
+            <p class="text-xs text-gray-500">Profiles declined due to missing Jathagam, inaccurate data, or verification failures.</p>
+          </div>
+          <div id="rejected-container" class="space-y-4">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 6: PAYMENTS MANAGEMENT (₹2,000 & ₹25,000)
+             =================================================================== -->
+                <!-- ===================================================================
+             TAB: GPAY ₹2,000 REGISTRATION PAYMENTS VERIFICATION QUEUE
+             =================================================================== -->
+        <section id="section-gpay-verification" class="tab-content hidden space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sandal-300 pb-4">
+            <div>
+              <h2 class="font-heading text-2xl font-bold text-maroon-950">GPay ₹2,000 Payment Verification Queue</h2>
+              <p class="text-xs text-gray-500">Verify applicants' Google Pay (GPay) transactions to 9942006877 and activate member accounts</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-semibold text-gray-600">Filter:</span>
+              <select id="gpay-filter-status" onchange="loadGPayPayments()" class="bg-white border border-sandal-300 rounded-xl px-3 py-1.5 text-xs font-semibold">
+                <option value="all">All Payments</option>
+                <option value="PAYMENT_SUBMITTED" selected>Awaiting Verification</option>
+                <option value="PENDING">Pending Submission</option>
+                <option value="PAID">Verified & Active</option>
+                <option value="FAILED">Rejected / Failed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl border border-sandal-300 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead class="bg-sandal-100 text-gray-700 font-bold border-b border-sandal-300">
+                  <tr>
+                    <th class="p-3.5">Registration ID</th>
+                    <th class="p-3.5">Applicant Details</th>
+                    <th class="p-3.5">Amount & Payee</th>
+                    <th class="p-3.5">Submitted UPI / UTR Ref</th>
+                    <th class="p-3.5">Date & Time</th>
+                    <th class="p-3.5">Status</th>
+                    <th class="p-3.5 text-right">Verification Action</th>
+                  </tr>
+                </thead>
+                <tbody id="gpay-table-body" class="divide-y divide-gray-100">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-payments" class="tab-content hidden space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sandal-300 pb-4">
+            <div>
+              <h2 class="font-heading text-2xl font-bold text-maroon-950">Matrimonial Payments</h2>
+              <p class="text-xs text-gray-500">Track compulsory ₹2,000 registration fees and ₹25,000 match finalisation service charges</p>
+            </div>
+            <button onclick="openRecordPaymentModal()" class="bg-maroon-900 hover:bg-maroon-800 text-gold-300 text-xs font-bold px-4 py-2 rounded-xl shadow flex items-center gap-1.5 cursor-pointer">
+              <span>➕</span> Record Offline Payment
+            </button>
+          </div>
+
+          <!-- Payment Summary Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-sandal-300 shadow-sm">
+              <span class="text-xs text-gray-500 block">Total Revenue Collected</span>
+              <strong id="pay-total-sum" class="font-heading text-2xl text-maroon-950 font-extrabold">₹68,000</strong>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-sandal-300 shadow-sm">
+              <span class="text-xs text-gray-500 block">Registration Fees (₹2,000 × 9)</span>
+              <strong id="pay-reg-sum" class="font-heading text-2xl text-emerald-900 font-extrabold">₹18,000</strong>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-sandal-300 shadow-sm">
+              <span class="text-xs text-gray-500 block">Match Finalisations (₹25,000 × 2)</span>
+              <strong id="pay-final-sum" class="font-heading text-2xl text-gold-600 font-extrabold">₹50,000</strong>
+            </div>
+          </div>
+
+          <!-- Payments Table -->
+          <div class="bg-white rounded-3xl border border-sandal-300 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead class="bg-sandal-100 text-gray-700 font-bold border-b border-sandal-300">
+                  <tr>
+                    <th class="p-3.5">Transaction ID</th>
+                    <th class="p-3.5">Profile / Candidate</th>
+                    <th class="p-3.5">Payment Type</th>
+                    <th class="p-3.5">Amount</th>
+                    <th class="p-3.5">Method</th>
+                    <th class="p-3.5">Status</th>
+                    <th class="p-3.5">Date</th>
+                  </tr>
+                </thead>
+                <tbody id="payments-table-body" class="divide-y divide-gray-100">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 7: MATCHES & PRIYA AI
+             =================================================================== -->
+        <section id="section-matches" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4">
+            <h2 class="font-heading text-2xl font-bold text-maroon-950">Priya Matching & AI Coordination</h2>
+            <p class="text-xs text-gray-500">Oversight of automated compatibility matching, planetary balance, and candidate pairing</p>
+          </div>
+          <div class="bg-white rounded-3xl p-6 border border-sandal-300 shadow-sm space-y-4">
+            <h3 class="font-heading font-bold text-base text-maroon-900">AI Compatibility Parameters</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Priya Matching combines 10 Vedic Poruthams with verified lifestyle preferences (Education parity, Gothram exogamy, family location proximity). Match scores exceeding 85% are promoted as top recommendations.
+            </p>
+            <div id="ai-matches-overview" class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 8: HOROSCOPES & JATHAGAM (SECURE VIEWER)
+             =================================================================== -->
+        <section id="section-horoscopes" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4">
+            <h2 class="font-heading text-2xl font-bold text-maroon-950">Secure Horoscope / Jathagam Repository</h2>
+            <p class="text-xs text-gray-500">Protected view of member planetary positions, Dosham records, and original Jathagam charts.</p>
+          </div>
+          <div id="horoscope-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 9: FAMILY ENQUIRIES
+             =================================================================== -->
+        <section id="section-enquiries" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4">
+            <h2 class="font-heading text-2xl font-bold text-maroon-950">Family Enquiries</h2>
+            <p class="text-xs text-gray-500">Direct enquiries received from families via website contact form or Kanchipuram office hotline.</p>
+          </div>
+          <div id="enquiries-list" class="space-y-3">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 10: MEMBERSHIP & RULES
+             =================================================================== -->
+        <section id="section-membership" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4">
+            <h2 class="font-heading text-2xl font-bold text-maroon-950">Membership Terms & Rules Governance</h2>
+            <p class="text-xs text-gray-500">Official business rules enforced across Sarvamangala Matrimony portal.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-3xl border border-sandal-300 shadow-sm space-y-3">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">📜</span>
+                <h3 class="font-heading font-bold text-base text-maroon-900">1. Registration Fee: ₹2,000</h3>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Compulsory activation fee charged to every candidate upon submission. Covers manual background check, phone verification, and portal listing for 1 year.
+              </p>
+              <span class="inline-block bg-gold-100 text-maroon-900 text-[11px] font-bold px-2.5 py-1 rounded-full">Compulsory</span>
+            </div>
+            <div class="bg-white p-6 rounded-3xl border border-sandal-300 shadow-sm space-y-3">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🤝</span>
+                <h3 class="font-heading font-bold text-base text-maroon-900">2. Match Finalisation Fee: ₹25,000</h3>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Service charge of ₹25,000 payable per person when an alliance is finalised through the platform. Includes marriage coordination and auspicious Vivaham facilitation.
+              </p>
+              <span class="inline-block bg-maroon-100 text-maroon-900 text-[11px] font-bold px-2.5 py-1 rounded-full">On Finalisation</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 11: REPORTS & ANALYTICS
+             =================================================================== -->
+        <section id="section-reports" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4">
+            <h2 class="font-heading text-2xl font-bold text-maroon-950">Matrimonial Reports</h2>
+            <p class="text-xs text-gray-500">District-wise distribution and demographic breakdowns across Tamil Nadu</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-3xl border border-sandal-300 shadow-sm space-y-3">
+              <h3 class="font-heading font-bold text-base text-maroon-900">District Alliances Distribution</h3>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between py-1 border-b"><span>Kanchipuram</span><strong class="font-bold">4 Profiles</strong></div>
+                <div class="flex justify-between py-1 border-b"><span>Chengalpattu</span><strong class="font-bold">1 Profile</strong></div>
+                <div class="flex justify-between py-1 border-b"><span>Chennai</span><strong class="font-bold">1 Profile</strong></div>
+                <div class="flex justify-between py-1 border-b"><span>Vellore</span><strong class="font-bold">1 Profile</strong></div>
+                <div class="flex justify-between py-1 border-b"><span>Salem</span><strong class="font-bold">1 Profile</strong></div>
+                <div class="flex justify-between py-1 border-b"><span>Madurai</span><strong class="font-bold">1 Profile</strong></div>
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-3xl border border-sandal-300 shadow-sm space-y-3">
+              <h3 class="font-heading font-bold text-base text-maroon-900">Revenue Breakdown</h3>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between py-1 border-b"><span>Registration Fees Total</span><strong class="text-emerald-700 font-bold">₹18,000</strong></div>
+                <div class="flex justify-between py-1 border-b"><span>Match Finalisations Total</span><strong class="text-emerald-700 font-bold">₹50,000</strong></div>
+                <div class="flex justify-between py-2 border-t text-sm"><span>Total Gross Revenue</span><strong class="text-maroon-900 font-extrabold">₹68,000</strong></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 12: SETTINGS
+             =================================================================== -->
+        <section id="section-settings" class="tab-content hidden space-y-5">
+          <div class="border-b border-sandal-300 pb-4">
+            <h2 class="font-heading text-2xl font-bold text-maroon-950">Admin Security Settings</h2>
+            <p class="text-xs text-gray-500">Update credentials, manage security policies, and maintain portal parameters</p>
+          </div>
+
+          <div class="max-w-xl bg-white p-6 rounded-3xl border border-sandal-300 shadow-sm space-y-4">
+            <h3 class="font-heading font-bold text-base text-maroon-900">Change Admin Password</h3>
+            <form onsubmit="handleChangePassword(event)" class="space-y-3 text-xs">
+              <div>
+                <label class="block font-bold text-gray-700 mb-1">Current Password</label>
+                <input type="password" id="pw-current" required class="w-full bg-sandal-50 border border-sandal-300 rounded-xl px-3 py-2">
+              </div>
+              <div>
+                <label class="block font-bold text-gray-700 mb-1">New Secure Password</label>
+                <input type="password" id="pw-new" required class="w-full bg-sandal-50 border border-sandal-300 rounded-xl px-3 py-2">
+              </div>
+              <button type="submit" class="bg-maroon-900 hover:bg-maroon-800 text-gold-300 font-bold py-2.5 px-4 rounded-xl shadow cursor-pointer">
+                Update Password
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             TAB 13: ADMIN ACTIVITY LOG (AUDIT TRAIL)
+             =================================================================== -->
+        <section id="section-logs" class="tab-content hidden space-y-5">
+          <div class="flex items-center justify-between border-b border-sandal-300 pb-4">
+            <div>
+              <h2 class="font-heading text-2xl font-bold text-maroon-950">Admin Activity Audit Log</h2>
+              <p class="text-xs text-gray-500">Chronological tamper-evident audit record of all administrative logins, approvals, and actions</p>
+            </div>
+            <button onclick="loadActivityLogs()" class="text-xs font-bold text-maroon-800 hover:underline">Refresh Logs</button>
+          </div>
+
+          <div class="bg-white rounded-3xl border border-sandal-300 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead class="bg-sandal-100 text-gray-700 font-bold border-b border-sandal-300">
+                  <tr>
+                    <th class="p-3.5">Timestamp</th>
+                    <th class="p-3.5">Admin Email</th>
+                    <th class="p-3.5">Action</th>
+                    <th class="p-3.5">Target ID</th>
+                    <th class="p-3.5">Details</th>
+                    <th class="p-3.5">IP Address</th>
+                  </tr>
+                </thead>
+                <tbody id="logs-table-body" class="divide-y divide-gray-100">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: VIEW FULL PROFILE DETAILS & JATHAGAM
+       ========================================================================= -->
+  <dialog id="modal-view-profile" class="rounded-3xl p-0 shadow-2xl border-2 border-gold-400 max-w-2xl w-full mx-auto my-auto bg-white">
+    <div class="p-6 space-y-5 max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="font-heading font-bold text-lg text-maroon-950" id="vp-title">Profile Inspection</h3>
+        <button onclick="document.getElementById('modal-view-profile').close()" class="w-8 h-8 rounded-full bg-gray-100 text-sm font-bold">✕</button>
+      </div>
+      <div id="vp-content" class="space-y-4 text-xs">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- =========================================================================
+       MODAL: RECORD PAYMENT
+       ========================================================================= -->
+  <dialog id="modal-record-payment" class="rounded-3xl p-0 shadow-2xl border-2 border-gold-400 max-w-md w-full mx-auto my-auto bg-white">
+    <div class="p-6 space-y-4">
+      <div class="flex items-center justify-between border-b pb-3">
+        <h3 class="font-heading font-bold text-lg text-maroon-950">Record Matrimonial Payment</h3>
+        <button onclick="document.getElementById('modal-record-payment').close()" class="w-8 h-8 rounded-full bg-gray-100 text-sm font-bold">✕</button>
+      </div>
+      <form onsubmit="handleRecordPaymentSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Profile ID</label>
+          <input type="text" id="rp-pid" placeholder="e.g. SM-2026-9214 or SM-FIX-0014" required class="w-full bg-sandal-50 border border-sandal-300 rounded-xl px-3 py-2">
+        </div>
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Candidate / Alliance Name</label>
+          <input type="text" id="rp-name" placeholder="Candidate or Couple Names" required class="w-full bg-sandal-50 border border-sandal-300 rounded-xl px-3 py-2">
+        </div>
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Payment Category</label>
+          <select id="rp-type" onchange="updatePaymentAmountDefault(this.value)" class="w-full bg-sandal-50 border border-sandal-300 rounded-xl px-3 py-2 font-bold">
+            <option value="Match Finalisation (₹25,000)">Match Finalisation (₹25,000)</option>
+            <option value="Registration Fee (₹2,000)">Registration Fee (₹2,000)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Amount (₹)</label>
+          <input type="number" id="rp-amount" value="25000" required class="w-full bg-sandal-50 border border-sandal-300 rounded-xl px-3 py-2 font-bold text-maroon-900">
+        </div>
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Payment Mode</label>
+          <select id="rp-method" class="w-full bg-sandal-50 border border-sandal-300 rounded-xl px-3 py-2">
+            <option value="Direct Bank Transfer">Direct Bank Transfer</option>
+            <option value="UPI (GPay / PhonePe)">UPI (GPay / PhonePe)</option>
+            <option value="Cash at Kanchipuram Office">Cash at Kanchipuram Office</option>
+            <option value="Cheque / DD">Cheque / DD</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full bg-maroon-900 hover:bg-maroon-800 text-gold-300 font-bold py-3 rounded-xl shadow cursor-pointer">
+          Confirm & Save Payment
+        </button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification -->
+  <div id="admin-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-maroon-950 text-white border-2 border-gold-400 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs font-semibold pointer-events-none">
+    <span>🛡️</span>
+    <span id="admin-toast-msg">Action confirmed</span>
+  </div>
+
+  <!-- =========================================================================
+       ADMIN APP LOGIC
+       ========================================================================= -->
+  <script>
+    let currentAdmin = null;
+    let allMembers = [];
+    let currentFilterStatus = 'all';
+
+    function getAdminToken() {
+      return sessionStorage.getItem("sm_admin_token") || localStorage.getItem("sm_admin_token") || "";
+    }
+
+    function setAdminToken(token) {
+      if (token) {
+        sessionStorage.setItem("sm_admin_token", token);
+        localStorage.setItem("sm_admin_token", token);
+        document.cookie = `sm_admin_session=${token}; path=/; max-age=86400; SameSite=Lax`;
+      }
+    }
+
+    function clearAdminToken() {
+      sessionStorage.removeItem("sm_admin_token");
+      localStorage.removeItem("sm_admin_token");
+      document.cookie = "sm_admin_session=; path=/; max-age=0; SameSite=Lax";
+      currentAdmin = null;
+    }
+
+    async function adminFetch(url, options = {}) {
+      const token = getAdminToken();
+      const headers = Object.assign({}, options.headers || {});
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+      return fetch(url, { ...options, headers });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("admin-toast");
+      const text = document.getElementById("admin-toast-msg");
+      if (!toast || !text) return;
+      text.textContent = msg;
+      toast.classList.remove("translate-y-24", "opacity-0");
+      toast.classList.add("translate-y-0", "opacity-100");
+      setTimeout(() => {
+        toast.classList.remove("translate-y-0", "opacity-100");
+        toast.classList.add("translate-y-24", "opacity-0");
+      }, 3500);
+    }
+
+    function togglePasswordVisibility() {
+      const inp = document.getElementById("login-password");
+      inp.type = inp.type === "password" ? "text" : "password";
+    }
+
+    function showLoginView() {
+      document.getElementById("view-login").classList.remove("hidden");
+      document.getElementById("view-denied").classList.add("hidden");
+      document.getElementById("view-dashboard").classList.add("hidden");
+      const errBox = document.getElementById("login-error-alert");
+      if (errBox) errBox.classList.add("hidden");
+    }
+
+    function showDeniedView() {
+      document.getElementById("view-login").classList.add("hidden");
+      document.getElementById("view-denied").classList.remove("hidden");
+      document.getElementById("view-dashboard").classList.add("hidden");
+    }
+
+    function handleShowAdminLogin() {
+      clearAdminToken();
+      showLoginView();
+    }
+
+    function showDashboardView(user) {
+      currentAdmin = user;
+      document.getElementById("view-login").classList.add("hidden");
+      document.getElementById("view-denied").classList.add("hidden");
+      document.getElementById("view-dashboard").classList.remove("hidden");
+      document.getElementById("admin-user-name").textContent = user.name || "Temple City Administrator";
+      refreshAllData();
+    }
+
+    // Check existing session on load
+    async function checkAuthSession() {
+      try {
+        const token = getAdminToken();
+        const res = await adminFetch("/api/admin/session");
+        const data = await res.json();
+        if (data.authenticated && data.user && data.user.role === "admin") {
+          showDashboardView(data.user);
+        } else {
+          showLoginView();
+        }
+      } catch (err) {
+        showLoginView();
+      }
+    }
+
+    // Handle Login Form Submit
+    document.getElementById("admin-login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+      const errBox = document.getElementById("login-error-alert");
+      const errMsg = document.getElementById("login-error-msg");
+      errBox.classList.add("hidden");
+
+      try {
+        const res = await fetch("/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          setAdminToken(data.token);
+          showToast("Authentication successful! Welcome to Admin Portal.");
+          showDashboardView(data.user);
+        } else {
+          errBox.classList.remove("hidden");
+          errMsg.textContent = data.error || "Authentication failed.";
+        }
+      } catch (err) {
+        errBox.classList.remove("hidden");
+        errMsg.textContent = "Unable to connect to authentication server.";
+      }
+    });
+
+    // Handle Logout
+    async function handleAdminLogout() {
+      try {
+        await adminFetch("/api/admin/logout", { method: "POST" });
+      } catch(e) {}
+      clearAdminToken();
+      showToast("Session destroyed. Logged out securely.");
+      showLoginView();
+    }
+
+    // Switch Sidebar Tab
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+      document.querySelectorAll(".sidebar-tab").forEach(el => {
+        el.classList.remove("text-white", "bg-maroon-800", "border-l-4", "border-gold-400");
+        el.classList.add("text-gray-300");
+      });
+
+      const target = document.getElementById(`section-${tabId}`);
+      if (target) target.classList.remove("hidden");
+
+      const btn = document.getElementById(`tab-btn-${tabId}`);
+      if (btn) {
+        btn.classList.add("text-white", "bg-maroon-800", "border-l-4", "border-gold-400");
+        btn.classList.remove("text-gray-300");
+      }
+
+      if (tabId === "trust-badge") {
+        loadTrustBadgesQueue();
+      } else if (tabId === "members" || tabId === "pending" || tabId === "approved" || tabId === "rejected") {
+        renderMembers();
+      } else if (tabId === "payments") {
+        loadPayments();
+      } else if (tabId === "logs") {
+        loadActivityLogs();
+      } else if (tabId === "enquiries") {
+        loadEnquiries();
+      } else if (tabId === "horoscopes") {
+        renderHoroscopes();
+      }
+    }
+
+    // Refresh All Data
+    async function refreshAllData() {
+      await Promise.all([loadStats(), loadMembers(), loadPayments(), loadEnquiries(), loadActivityLogs(), loadTrustBadgesQueue()]);
+    }
+
+    // Load Stats
+    async function loadStats() {
+      try {
+        const res = await adminFetch("/api/admin/stats");
+        if (res.status === 401 || res.status === 403) {
+          if (!getAdminToken()) showLoginView();
+          else showDeniedView();
+          return;
+        }
+        const s = await res.json();
+        document.getElementById("stat-total-members").textContent = s.total_members;
+        document.getElementById("stat-new-reg").textContent = s.pending_approvals;
+        document.getElementById("stat-pending").textContent = s.pending_approvals;
+        document.getElementById("stat-approved").textContent = s.approved_profiles;
+        document.getElementById("stat-reg-rev").textContent = `₹${s.registration_revenue.toLocaleString('en-IN')}`;
+        document.getElementById("stat-final-rev").textContent = `₹${s.finalisation_revenue.toLocaleString('en-IN')}`;
+        document.getElementById("stat-enquiries").textContent = s.new_enquiries;
+
+        document.getElementById("badge-pending").textContent = s.pending_approvals;
+        document.getElementById("badge-enquiries").textContent = s.new_enquiries;
+
+        const banner = document.getElementById("pending-alert-banner");
+        if (banner) {
+          banner.style.display = s.pending_approvals > 0 ? "flex" : "none";
+        }
+      } catch (e) {
+        console.error("Stats load error:", e);
+      }
+    }
+
+    // Load Members
+    async function loadMembers() {
+      try {
+        const res = await adminFetch("/api/admin/members");
+        if (res.status === 401 || res.status === 403) {
+          if (!getAdminToken()) showLoginView();
+          else showDeniedView();
+          return;
+        }
+        const data = await res.json();
+        allMembers = data.members || [];
+        updateCounts();
+        renderDashboardRecent();
+        renderMembers();
+        renderHoroscopes();
+      } catch (e) {
+        console.error("Members load error:", e);
+      }
+    }
+
+    function updateCounts() {
+      document.getElementById("count-all").textContent = allMembers.length;
+      document.getElementById("count-pending").textContent = allMembers.filter(m => m.status === 'pending').length;
+      document.getElementById("count-approved").textContent = allMembers.filter(m => m.status === 'approved').length;
+      document.getElementById("count-rejected").textContent = allMembers.filter(m => m.status === 'rejected').length;
+      document.getElementById("count-suspended").textContent = allMembers.filter(m => m.status === 'suspended').length;
+      document.getElementById("count-blocked").textContent = allMembers.filter(m => m.status === 'blocked').length;
+    }
+
+    // Render Dashboard Recent Members Table
+    function renderDashboardRecent() {
+      const tbody = document.getElementById("dashboard-recent-members");
+      if (!tbody) return;
+      tbody.innerHTML = allMembers.slice(0, 6).map(m => `
+        <tr class="hover:bg-gray-50 text-xs">
+          <td class="p-3 font-bold text-gray-500">${m.id}</td>
+          <td class="p-3">
+            <div class="flex items-center gap-2">
+              <img src="${m.photo_url || '../assets/circle-logo.png'}" class="w-7 h-7 rounded-full object-cover border" />
+              <div>
+                <strong class="text-gray-900 block">${m.name}</strong>
+                <span class="text-[10px] text-gray-500">${m.age} Yrs • ${m.gender}</span>
+              </div>
+            </div>
+          </td>
+          <td class="p-3">${m.caste}</td>
+          <td class="p-3">${m.district}</td>
+          <td class="p-3 text-[11px]">${m.nakshatra} (${m.rasi.split(' ')[0]})</td>
+          <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">${m.payment_status}</span></td>
+          <td class="p-3">${renderStatusBadge(m.status)}</td>
+          <td class="p-3">
+            <button onclick="viewProfileDetail('${m.id}')" class="px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold">View</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function renderStatusBadge(status) {
+      if (status === 'approved') return '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Approved</span>';
+      if (status === 'pending') return '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Pending Review</span>';
+      if (status === 'rejected') return '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800">Rejected</span>';
+      if (status === 'suspended') return '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-800">Suspended</span>';
+      if (status === 'blocked') return '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-black text-white">Blocked</span>';
+      return `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-600">${status}</span>`;
+    }
+
+    // Set Filter in Members view
+    function setMemberStatusFilter(status, btn) {
+      currentFilterStatus = status;
+      document.querySelectorAll(".member-filter-pill").forEach(el => {
+        el.classList.remove("bg-maroon-900", "text-white");
+        el.classList.add("bg-white", "text-gray-700");
+      });
+      btn.classList.add("bg-maroon-900", "text-white");
+      btn.classList.remove("bg-white", "text-gray-700");
+      renderMembers();
+    }
+
+    function filterMembersTable() {
+      renderMembers();
+    }
+
+    // Render Members Table
+    function renderMembers() {
+      const tbody = document.getElementById("members-table-body");
+      if (!tbody) return;
+      const search = (document.getElementById("members-search-input")?.value || "").toLowerCase();
+
+      let filtered = allMembers.filter(m => {
+        const matchesStatus = currentFilterStatus === 'all' || m.status === currentFilterStatus;
+        const matchesSearch = !search ||
+          m.name.toLowerCase().includes(search) ||
+          m.id.toLowerCase().includes(search) ||
+          m.caste.toLowerCase().includes(search) ||
+          m.district.toLowerCase().includes(search);
+        return matchesStatus && matchesSearch;
+      });
+
+      tbody.innerHTML = filtered.map(m => `
+        <tr class="hover:bg-gray-50 text-xs">
+          <td class="p-3.5">
+            <div class="flex items-center gap-2.5">
+              <img src="${m.photo_url || '../assets/circle-logo.png'}" class="w-9 h-9 rounded-full object-cover border" />
+              <div>
+                <strong class="text-gray-900 block font-bold">${m.name}</strong>
+                <span class="text-[10px] text-gray-400">${m.id} • Registered ${m.reg_date}</span>
+              </div>
+            </div>
+          </td>
+          <td class="p-3.5">${m.age} Yrs • ${m.gender === 'female' ? 'Bride' : 'Groom'}</td>
+          <td class="p-3.5"><strong>${m.caste}</strong><br><span class="text-[10px] text-gray-500">${m.subcaste || '-'}</span></td>
+          <td class="p-3.5 font-medium">${m.district}<br><span class="text-[10px] text-gray-500">${m.city || '-'}</span></td>
+          <td class="p-3.5">${m.occupation || '-'}<br><span class="text-[10px] text-emerald-700 font-bold">${m.income || '-'}</span></td>
+          <td class="p-3.5">
+            <span class="text-[11px] font-semibold block">${m.nakshatra}</span>
+            <span class="text-[10px] text-gray-500">${m.rasi}</span>
+          </td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">${m.payment_status}</span></td>
+          <td class="p-3.5">${renderStatusBadge(m.status)}</td>
+          <td class="p-3.5 text-center">
+            <div class="flex items-center justify-center gap-1 flex-wrap">
+              <button onclick="viewProfileDetail('${m.id}')" title="View Full Profile & Horoscope" class="px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold">Inspect</button>
+              ${m.status !== 'approved' ? `<button onclick="performMemberAction('${m.id}', 'approve')" class="px-2 py-1 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-bold">Approve</button>` : ''}
+              ${m.status !== 'rejected' ? `<button onclick="performMemberAction('${m.id}', 'reject')" class="px-2 py-1 rounded bg-amber-600 hover:bg-amber-700 text-white font-bold">Reject</button>` : ''}
+              ${m.status !== 'suspended' && m.status === 'approved' ? `<button onclick="performMemberAction('${m.id}', 'suspend')" class="px-2 py-1 rounded bg-gray-600 hover:bg-gray-700 text-white font-bold">Suspend</button>` : ''}
+              <button onclick="performMemberAction('${m.id}', 'delete')" title="Delete permanently" class="px-2 py-1 rounded bg-rose-100 hover:bg-rose-200 text-rose-800 font-bold">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+
+      // Render Pending Cards
+      renderPendingQueue();
+      // Render Approved Cards
+      renderApprovedGrid();
+      // Render Rejected Cards
+      renderRejectedQueue();
+    }
+
+    function renderPendingQueue() {
+      const container = document.getElementById("pending-cards-container");
+      if (!container) return;
+      const pendings = allMembers.filter(m => m.status === 'pending');
+      if (pendings.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-gray-500 bg-white rounded-3xl border border-sandal-300">✅ All registered profiles have been reviewed! Zero pending approvals.</div>`;
+        return;
+      }
+      container.innerHTML = pendings.map(m => `
+        <div class="bg-white rounded-3xl border-2 border-amber-300 p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <img src="${m.photo_url || '../assets/circle-logo.png'}" class="w-16 h-16 rounded-2xl object-cover border-2 border-amber-400 shadow-sm" />
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-bold text-sm text-gray-900">${m.name}</h4>
+                <span class="bg-amber-100 text-amber-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full">New Submission</span>
+              </div>
+              <p class="text-xs text-gray-600 mt-0.5">${m.id} • ${m.age} Yrs • ${m.gender} • ${m.caste} (${m.subcaste || 'Tamil Hindu'})</p>
+              <p class="text-xs text-gray-500 font-medium">📍 ${m.city}, ${m.district} • Education: ${m.education}</p>
+              <div class="mt-1 flex items-center gap-2 text-[11px] text-maroon-900 font-bold">
+                <span>🪐 Star: ${m.nakshatra}</span>
+                <span>•</span>
+                <span>Rasi: ${m.rasi}</span>
+                <span>•</span>
+                <span class="text-emerald-700">Fee: ${m.payment_status}</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 self-end md:self-center">
+            <button onclick="viewProfileDetail('${m.id}')" class="px-3.5 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold cursor-pointer">Inspect Jathagam</button>
+            <button onclick="performMemberAction('${m.id}', 'approve')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow cursor-pointer">Approve Profile</button>
+            <button onclick="performMemberAction('${m.id}', 'reject')" class="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow cursor-pointer">Reject</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderApprovedGrid() {
+      const container = document.getElementById("approved-grid-container");
+      if (!container) return;
+      const approved = allMembers.filter(m => m.status === 'approved');
+      container.innerHTML = approved.map(m => `
+        <div class="bg-white rounded-3xl p-4 border border-sandal-300 shadow-sm flex items-center gap-3">
+          <img src="${m.photo_url || '../assets/circle-logo.png'}" class="w-14 h-14 rounded-2xl object-cover border" />
+          <div class="flex-1 min-w-0">
+            <h4 class="font-bold text-xs text-gray-900 truncate">${m.name}</h4>
+            <p class="text-[11px] text-gray-500">${m.age} Yrs • ${m.caste} • ${m.district}</p>
+            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 mt-1">Live Active</span>
+          </div>
+          <button onclick="viewProfileDetail('${m.id}')" class="text-xs text-maroon-800 hover:underline font-bold">View</button>
+        </div>
+      `).join("");
+    }
+
+    function renderRejectedQueue() {
+      const container = document.getElementById("rejected-container");
+      if (!container) return;
+      const rejected = allMembers.filter(m => m.status === 'rejected');
+      if (rejected.length === 0) {
+        container.innerHTML = `<div class="p-6 text-center text-gray-500 bg-white rounded-3xl border border-sandal-300">Zero rejected profiles.</div>`;
+        return;
+      }
+      container.innerHTML = rejected.map(m => `
+        <div class="bg-white p-4 rounded-2xl border border-rose-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <img src="${m.photo_url || '../assets/circle-logo.png'}" class="w-10 h-10 rounded-full object-cover" />
+            <div>
+              <strong class="text-xs font-bold text-gray-900">${m.name}</strong> (${m.id})
+              <p class="text-[11px] text-rose-700">Reason: ${m.notes || 'Incomplete verification / Missing genuine document'}</p>
+            </div>
+          </div>
+          <button onclick="performMemberAction('${m.id}', 'approve')" class="px-3 py-1 rounded-xl bg-emerald-600 text-white text-xs font-bold">Re-Approve</button>
+        </div>
+      `).join("");
+    }
+
+    // Render Horoscopes View
+    function renderHoroscopes() {
+      const grid = document.getElementById("horoscope-cards-grid");
+      if (!grid) return;
+      grid.innerHTML = allMembers.map(m => `
+        <div class="bg-white rounded-3xl p-5 border border-sandal-300 shadow-sm space-y-3">
+          <div class="flex items-center gap-3 border-b pb-3">
+            <img src="${m.photo_url || '../assets/circle-logo.png'}" class="w-10 h-10 rounded-full object-cover border" />
+            <div>
+              <h4 class="font-bold text-xs text-gray-900">${m.name}</h4>
+              <span class="text-[10px] text-gray-500">${m.id} • ${m.gender}</span>
+            </div>
+          </div>
+          <div class="space-y-1.5 text-xs">
+            <div class="flex justify-between"><span class="text-gray-500">Rasi:</span><strong class="font-bold text-maroon-900">${m.rasi}</strong></div>
+            <div class="flex justify-between"><span class="text-gray-500">Nakshatra:</span><strong class="font-bold text-maroon-900">${m.nakshatra}</strong></div>
+            <div class="flex justify-between"><span class="text-gray-500">Lagnam:</span><strong class="font-bold">${m.lagnam || 'Simmam'}</strong></div>
+            <div class="flex justify-between"><span class="text-gray-500">Dosham:</span><strong class="text-amber-800 font-bold">${m.dosham || 'None'}</strong></div>
+            <div class="flex justify-between"><span class="text-gray-500">Birth Time/Place:</span><span>${m.birth_time || '-'}, ${m.birth_place || m.district}</span></div>
+          </div>
+          <div class="pt-2 border-t flex items-center justify-between text-xs">
+            <span class="text-[10px] text-emerald-700 font-bold">📄 Jathagam Document Verified</span>
+            <button onclick="viewProfileDetail('${m.id}')" class="text-maroon-800 font-bold hover:underline">Full Chart →</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // Perform Member Action
+    async function performMemberAction(id, action) {
+      let notes = "";
+      if (action === 'reject') {
+        notes = prompt("Enter reason for rejection (e.g., Incomplete Horoscope, Unverified Phone):");
+        if (notes === null) return;
+      } else if (action === 'delete') {
+        if (!confirm(`Are you sure you want to permanently delete profile ${id}? This cannot be undone.`)) return;
+      }
+
+      try {
+        const res = await adminFetch("/api/admin/member-action", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, action, notes })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`Profile ${id} successfully updated: ${action.toUpperCase()}`);
+          refreshAllData();
+        } else {
+          showToast(data.error || "Action failed");
+        }
+      } catch (err) {
+        showToast("Error executing action");
+      }
+    }
+
+    // View Profile Detail Modal
+    function viewProfileDetail(id) {
+      const m = allMembers.find(p => p.id === id);
+      if (!m) return;
+      document.getElementById("vp-title").textContent = `Inspection: ${m.name} (${m.id})`;
+      document.getElementById("vp-content").innerHTML = `
+        <div class="flex items-center gap-4 bg-sandal-100 p-4 rounded-2xl">
+          <img src="${m.photo_url || '../assets/circle-logo.png'}" class="w-20 h-20 rounded-2xl object-cover border-2 border-gold-400" />
+          <div class="space-y-1">
+            <h4 class="font-bold text-base text-maroon-950">${m.name}</h4>
+            <p class="text-gray-600">${m.age} Yrs • ${m.height || '5 ft 5 in'} • ${m.marital_status}</p>
+            <p class="text-maroon-900 font-bold">${m.caste} (${m.subcaste || 'Tamil Hindu'}) • ${m.mother_tongue}</p>
+            <p class="text-gray-500">📍 ${m.address || m.district}</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white p-3 rounded-xl border space-y-1">
+            <span class="text-[10px] text-gray-400 font-bold uppercase block">Career & Income</span>
+            <p><strong>Education:</strong> ${m.education}</p>
+            <p><strong>Occupation:</strong> ${m.occupation}</p>
+            <p><strong>Annual Income:</strong> ${m.income}</p>
+          </div>
+          <div class="bg-white p-3 rounded-xl border space-y-1">
+            <span class="text-[10px] text-gray-400 font-bold uppercase block">Vedic Jathagam</span>
+            <p><strong>Rasi:</strong> ${m.rasi}</p>
+            <p><strong>Nakshatra:</strong> ${m.nakshatra}</p>
+            <p><strong>Lagnam:</strong> ${m.lagnam || 'Simmam'}</p>
+            <p><strong>Dosham:</strong> ${m.dosham || 'None'}</p>
+            <p><strong>Birth:</strong> ${m.birth_date} at ${m.birth_time || '-'} (${m.birth_place || m.district})</p>
+          </div>
+        </div>
+        <div class="bg-sandal-50 p-3 rounded-xl border text-gray-700">
+          <span class="text-[10px] text-gray-400 font-bold uppercase block">Partner Expectations</span>
+          <p>${m.partner_pref || 'Compatible Tamil Hindu alliance with matching horoscope.'}</p>
+        </div>
+        <div class="flex items-center justify-between pt-2">
+          <span class="font-bold text-emerald-800">Fee Status: ${m.payment_status}</span>
+          <div class="flex gap-2">
+            ${m.status !== 'approved' ? `<button onclick="performMemberAction('${m.id}', 'approve'); document.getElementById('modal-view-profile').close();" class="px-4 py-1.5 rounded-xl bg-emerald-600 text-white font-bold">Approve</button>` : ''}
+            ${m.status !== 'rejected' ? `<button onclick="performMemberAction('${m.id}', 'reject'); document.getElementById('modal-view-profile').close();" class="px-4 py-1.5 rounded-xl bg-amber-600 text-white font-bold">Reject</button>` : ''}
+          </div>
+        </div>
+      `;
+      document.getElementById("modal-view-profile").showModal();
+    }
+
+    // Load Payments
+    async function loadPayments() {
+      try {
+        const res = await adminFetch("/api/admin/payments");
+        if (res.status === 401 || res.status === 403) {
+          if (!getAdminToken()) showLoginView();
+          else showDeniedView();
+          return;
+        }
+        const data = await res.json();
+        const payments = data.payments || [];
+
+        let total = 0, reg = 0, final = 0;
+        payments.forEach(p => {
+          total += p.amount;
+          if (p.payment_type.includes("Registration")) reg += p.amount;
+          if (p.payment_type.includes("Finalisation")) final += p.amount;
+        });
+
+        document.getElementById("pay-total-sum").textContent = `₹${total.toLocaleString('en-IN')}`;
+        document.getElementById("pay-reg-sum").textContent = `₹${reg.toLocaleString('en-IN')}`;
+        document.getElementById("pay-final-sum").textContent = `₹${final.toLocaleString('en-IN')}`;
+
+        const tbody = document.getElementById("payments-table-body");
+        if (tbody) {
+          tbody.innerHTML = payments.map(p => `
+            <tr class="hover:bg-gray-50 text-xs">
+              <td class="p-3.5 font-bold text-gray-500">${p.txn_id}</td>
+              <td class="p-3.5 font-bold text-gray-900">${p.profile_name}<br><span class="text-[10px] text-gray-400">${p.profile_id}</span></td>
+              <td class="p-3.5 font-medium">${p.payment_type}</td>
+              <td class="p-3.5 font-extrabold ${p.amount >= 25000 ? 'text-emerald-700 text-sm' : 'text-maroon-900'}">₹${p.amount.toLocaleString('en-IN')}</td>
+              <td class="p-3.5">${p.method}</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">${p.status}</span></td>
+              <td class="p-3.5 text-gray-500">${p.date}</td>
+            </tr>
+          `).join("");
+        }
+      } catch (e) {
+        console.error("Payments error:", e);
+      }
+    }
+
+    function openRecordPaymentModal() {
+      document.getElementById("modal-record-payment").showModal();
+    }
+
+    function updatePaymentAmountDefault(type) {
+      const amtInput = document.getElementById("rp-amount");
+      if (type.includes("25,000")) amtInput.value = "25000";
+      else amtInput.value = "2000";
+    }
+
+    async function handleRecordPaymentSubmit(e) {
+      e.preventDefault();
+      const pid = document.getElementById("rp-pid").value.trim();
+      const pname = document.getElementById("rp-name").value.trim();
+      const ptype = document.getElementById("rp-type").value;
+      const amount = document.getElementById("rp-amount").value;
+      const method = document.getElementById("rp-method").value;
+
+      try {
+        const res = await adminFetch("/api/admin/record-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ profile_id: pid, profile_name: pname, payment_type: ptype, amount, method })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`Payment recorded: Txn ${data.txn_id}`);
+          document.getElementById("modal-record-payment").close();
+          refreshAllData();
+        }
+      } catch (err) {
+        showToast("Error recording payment");
+      }
+    }
+
+    // Load Activity Logs
+    async function loadActivityLogs() {
+      try {
+        const res = await adminFetch("/api/admin/logs");
+        if (res.status === 401 || res.status === 403) {
+          if (!getAdminToken()) showLoginView();
+          else showDeniedView();
+          return;
+        }
+        const data = await res.json();
+        const logs = data.logs || [];
+        const tbody = document.getElementById("logs-table-body");
+        if (tbody) {
+          tbody.innerHTML = logs.map(l => `
+            <tr class="hover:bg-gray-50 text-xs">
+              <td class="p-3.5 text-gray-500 whitespace-nowrap">${l.timestamp}</td>
+              <td class="p-3.5 font-bold text-gray-800">${l.admin_email}</td>
+              <td class="p-3.5 font-semibold text-maroon-900">${l.action}</td>
+              <td class="p-3.5 text-gray-500">${l.target_id || '-'}</td>
+              <td class="p-3.5 text-gray-700">${l.details}</td>
+              <td class="p-3.5 text-gray-400 font-mono text-[10px]">${l.ip_address}</td>
+            </tr>
+          `).join("");
+        }
+      } catch (e) {
+        console.error("Logs error:", e);
+      }
+    }
+
+    // Load Enquiries
+    async function loadEnquiries() {
+      try {
+        const res = await adminFetch("/api/admin/enquiries");
+        if (res.status === 401 || res.status === 403) {
+          if (!getAdminToken()) showLoginView();
+          else showDeniedView();
+          return;
+        }
+        const data = await res.json();
+        const enqs = data.enquiries || [];
+        const container = document.getElementById("enquiries-list");
+        if (container) {
+          container.innerHTML = enqs.map(e => `
+            <div class="bg-white p-5 rounded-3xl border border-sandal-300 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <h4 class="font-bold text-sm text-gray-900">${e.name}</h4>
+                  <span class="bg-gold-100 text-maroon-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full">${e.status}</span>
+                </div>
+                <p class="text-xs text-gray-600">📞 ${e.phone} • 📍 ${e.district} • Received: ${e.date}</p>
+                <p class="text-xs text-gray-700 bg-sandal-50 p-2.5 rounded-xl border border-sandal-200 mt-2">"${e.message}"</p>
+              </div>
+              <div class="flex items-center gap-2 self-end md:self-center">
+                <a href="https://wa.me/91${e.phone}" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow flex items-center gap-1">
+                  <span>💬</span> WhatsApp
+                </a>
+                <a href="tel:${e.phone}" class="px-3.5 py-2 rounded-xl bg-maroon-900 hover:bg-maroon-800 text-gold-300 text-xs font-bold">
+                  <span>📞</span> Call
+                </a>
+              </div>
+            </div>
+          `).join("");
+        }
+      } catch (e) {
+        console.error("Enquiries error:", e);
+      }
+    }
+
+    // Change Password
+    async function handleChangePassword(e) {
+      e.preventDefault();
+      const current_password = document.getElementById("pw-current").value;
+      const new_password = document.getElementById("pw-new").value;
+      try {
+        const res = await adminFetch("/api/admin/change-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ current_password, new_password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast("Password updated successfully!");
+          document.getElementById("pw-current").value = "";
+          document.getElementById("pw-new").value = "";
+        } else {
+          showToast(data.error || "Password update failed.");
+        }
+      } catch (err) {
+        showToast("Error updating password.");
+      }
+    }
+
+    
+    // =========================================================================
+    // GPay ₹2,000 Registration Payments Verification
+    // =========================================================================
+    async function loadGPayPayments() {
+      try {
+        const filter = document.getElementById("gpay-filter-status")?.value || "all";
+        const res = await adminFetch(`/api/admin/registration-payments?status=${filter}`);
+        if (res.status === 401 || res.status === 403) {
+          if (!getAdminToken()) showLoginView();
+          else showDeniedView();
+          return;
+        }
+        const data = await res.json();
+        const payments = data.payments || [];
+        const tbody = document.getElementById("gpay-table-body");
+        
+        // Update pending badge
+        const pendingCount = payments.filter(p => p.status === 'PAYMENT_SUBMITTED').length;
+        const badge = document.getElementById("badge-gpay-pending");
+        if (badge) badge.textContent = pendingCount;
+
+        if (tbody) {
+          if (!payments.length) {
+            tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-gray-400">No payment records found.</td></tr>`;
+            return;
+          }
+          tbody.innerHTML = payments.map(p => `
+            <tr class="hover:bg-gray-50 text-xs">
+              <td class="p-3.5 font-mono font-bold text-maroon-900">${p.registration_id}</td>
+              <td class="p-3.5">
+                <div class="font-bold text-gray-900">${p.applicant_name}</div>
+                <div class="text-[11px] text-gray-500">📞 ${p.applicant_phone} • ✉️ ${p.applicant_email}</div>
+              </td>
+              <td class="p-3.5">
+                <span class="font-bold text-emerald-800">₹${p.amount}</span>
+                <span class="block text-[10px] text-gray-500">Payee: ${p.payee_number}</span>
+              </td>
+              <td class="p-3.5">
+                <span class="font-mono bg-sandal-100 px-2 py-0.5 rounded text-gray-800 font-semibold">${p.txn_ref || 'Not submitted'}</span>
+              </td>
+              <td class="p-3.5 text-gray-500 text-[11px]">${p.submitted_at || p.created_at}</td>
+              <td class="p-3.5">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold ${
+                  p.status === 'PAID' ? 'bg-emerald-100 text-emerald-800' :
+                  p.status === 'PAYMENT_SUBMITTED' ? 'bg-amber-100 text-amber-900 animate-pulse' :
+                  p.status === 'FAILED' ? 'bg-rose-100 text-rose-800' : 'bg-gray-100 text-gray-700'
+                }">
+                  ${p.status}
+                </span>
+              </td>
+              <td class="p-3.5 text-right space-x-1">
+                ${p.status === 'PAYMENT_SUBMITTED' || p.status === 'PENDING' ? `
+                  <button onclick="handleVerifyPayment('${p.registration_id}', 'approve')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-xs">
+                    ✓ Verify & Activate
+                  </button>
+                  <button onclick="handleVerifyPayment('${p.registration_id}', 'reject')" class="px-2.5 py-1 bg-rose-100 hover:bg-rose-200 text-rose-800 font-bold rounded-xl text-xs">
+                    ✕ Reject
+                  </button>
+                ` : `
+                  <span class="text-xs text-gray-400 font-mono">${p.receipt_number || 'Processed'}</span>
+                `}
+              </td>
+            </tr>
+          `).join("");
+        }
+      } catch (e) {
+        console.error("GPay payments error:", e);
+      }
+    }
+
+    async function handleVerifyPayment(regId, action) {
+      let notes = "";
+      if (action === "reject") {
+        notes = prompt("Please enter the reason for rejecting this payment claim (e.g. UTR not found in bank statement):");
+        if (!notes) return;
+      } else {
+        if (!confirm(`Are you sure you want to approve ₹2,000 payment for ${regId}? This will automatically ACTIVATE the candidate's account and profile.`)) {
+          return;
+        }
+      }
+
+      try {
+        const res = await adminFetch("/api/admin/verify-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ registration_id: regId, action, notes })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`Payment ${action === 'approve' ? 'verified and account activated!' : 'rejected.'}`);
+          loadGPayPayments();
+          loadStats();
+          loadMembers();
+        } else {
+          showToast(data.error || "Verification failed");
+        }
+      } catch (e) {
+        showToast("Error processing payment verification");
+      }
+    }
+
+    
+    // =========================================================================
+    // KANCHI SILK TRUST BADGES ADMIN FUNCTIONS
+    // =========================================================================
+    async function loadTrustBadgesQueue() {
+      try {
+        const res = await adminFetch("/api/admin/trust-badges");
+        if (res.status === 401 || res.status === 403) return;
+        const data = await res.json();
+        const badges = data.badges || [];
+
+        const pendingCount = badges.filter(b => b.trust_badge_status === "pending").length;
+        const countBadge = document.getElementById("badge-trust-count");
+        if (countBadge) countBadge.textContent = pendingCount;
+
+        const tbody = document.getElementById("trust-badges-table-body");
+        if (!tbody) return;
+
+        if (!badges.length) {
+          tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-gray-400">No member profiles found.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = badges.map(b => `
+          <tr class="hover:bg-gray-50 text-xs ${b.trust_badge_status === 'pending' ? 'bg-amber-50/40' : ''}">
+            <td class="p-3.5 font-mono font-bold text-maroon-900">${b.id}</td>
+            <td class="p-3.5">
+              <div class="font-bold text-gray-900">${b.name}</div>
+              <div class="text-[11px] text-gray-500 capitalize">${b.gender} • ${b.age} Yrs • 📞 ${b.phone}</div>
+            </td>
+            <td class="p-3.5 text-gray-700 font-medium">${b.district}, TN</td>
+            <td class="p-3.5">
+              ${b.trust_badge_doc ? `
+                <span class="inline-block px-2.5 py-1 rounded-lg bg-sandal-100 border border-sandal-300 font-mono text-gray-800 text-[11px]">
+                  🔒 ${b.trust_badge_doc}
+                </span>
+              ` : `
+                <span class="text-gray-400 italic text-[11px]">No document submitted</span>
+              `}
+            </td>
+            <td class="p-3.5">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold ${
+                b.trust_badge_status === 'verified' ? 'bg-gradient-to-r from-gold-500 to-amber-500 text-maroon-950 border border-gold-400' :
+                b.trust_badge_status === 'pending' ? 'bg-amber-100 text-amber-900 animate-pulse border border-amber-300' :
+                b.trust_badge_status === 'rejected' ? 'bg-rose-100 text-rose-800 border border-rose-300' :
+                'bg-gray-100 text-gray-600'
+              }">
+                ${b.trust_badge_status === 'verified' ? '🪔 Verified' : b.trust_badge_status.toUpperCase()}
+              </span>
+            </td>
+            <td class="p-3.5 text-gray-500 text-[11px]">
+              ${b.trust_badge_verified_at ? `${b.trust_badge_verified_at.split('T')[0]} by ${b.trust_badge_verified_by || 'Admin'}` : '—'}
+            </td>
+            <td class="p-3.5 text-right space-x-1.5 whitespace-nowrap">
+              ${b.trust_badge_status !== 'verified' ? `
+                <button onclick="handleVerifyTrustBadge('${b.id}', 'approve')" class="px-3 py-1 bg-gradient-to-r from-gold-600 to-amber-600 hover:from-gold-500 hover:to-amber-500 text-maroon-950 font-black rounded-xl text-xs shadow-xs">
+                  🪔 Approve Badge
+                </button>
+              ` : ''}
+              ${b.trust_badge_status !== 'rejected' ? `
+                <button onclick="handleVerifyTrustBadge('${b.id}', 'reject')" class="px-2.5 py-1 bg-rose-100 hover:bg-rose-200 text-rose-800 font-bold rounded-xl text-xs">
+                  ✕ Reject
+                </button>
+              ` : ''}
+              ${b.trust_badge_status === 'verified' ? `
+                <span class="text-[11px] text-emerald-700 font-bold">✓ Active Trust Seal</span>
+              ` : ''}
+            </td>
+          </tr>
+        `).join("");
+      } catch (e) {
+        console.error("Trust badges load error:", e);
+      }
+    }
+
+    async function handleVerifyTrustBadge(profileId, action) {
+      const verb = action === 'approve' ? 'APPROVE and grant the Kanchi Silk Trust badge to' : 'REJECT trust badge application for';
+      if (!confirm(`Are you sure you want to ${verb} profile ${profileId}?`)) return;
+
+      try {
+        const res = await adminFetch("/api/admin/verify-trust-badge", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ profile_id: profileId, action })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`Kanchi Silk Trust badge ${action}d for ${profileId}! 🪔`);
+          loadTrustBadgesQueue();
+        } else {
+          showToast(data.error || "Action failed");
+        }
+      } catch (e) {
+        showToast("Error updating trust badge");
+      }
+    }
+
+    // Initial session check
+    checkAuthSession();
+  </script>
+</body>
+</html>

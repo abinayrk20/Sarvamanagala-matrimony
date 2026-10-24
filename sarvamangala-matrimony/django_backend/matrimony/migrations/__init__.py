@@ -1,0 +1,3 @@
+"""
+Matrimony migrations package.
+"""
